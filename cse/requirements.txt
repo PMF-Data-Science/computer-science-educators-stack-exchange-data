@@ -3,9 +3,8 @@ charset-normalizer==2.0.9
 greenlet==1.1.2
 idna==3.3
 importlib-metadata==4.10.0
-pip==21.3.1
+psycopg2==2.9.3
 requests==2.26.0
-setuptools==41.2.0
 six==1.16.0
 SQLAlchemy==1.4.28
 StackAPI==0.2.0
