@@ -7,5 +7,5 @@ from models import Base
 
 engine = create_engine(DATABASE_URL)
 
-#Base.metadata.drop_all(engine)
+Base.metadata.drop_all(engine)
 Base.metadata.create_all(engine)

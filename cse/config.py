@@ -2,4 +2,7 @@
 import psycopg2
 # Scheme: "postgresql+psycopg2://<USERNAME>:<PASSWORD>@<IP_ADDRESS>:<PORT>/<DATABASE_NAME>"
 
-DATABASE_URL = 'postgresql+psycopg2://postgres:post016gre@localhost:5432/cse'
+USER=''
+PASSWORD=''
+DATABASE_NAME=''
+DATABASE_URL = f'postgresql+psycopg2://{USER}:{PASSWORD}@localhost:5432/{DATABASE_NAME}'
