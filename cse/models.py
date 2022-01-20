@@ -31,7 +31,7 @@ Base = declarative_base()
 class Qestion(Base):
 
     __tablename__ = 'question'
-    question_id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
     title = Column(String)
     content = Column(String)
     created_at = Column(DateTime)
@@ -45,7 +45,7 @@ class Qestion(Base):
     closed = Column(BOOLEAN)
     closed_reason = Column(String)
 
-    user_id = Column(Integer, ForeignKey('user.user_id'))
+    user_id = Column(Integer, ForeignKey('user.id'))
 
     #relations
     answers = relationship("Answer")
@@ -55,29 +55,34 @@ class Qestion(Base):
 class Answer(Base):
     
     __tablename__ = 'answer'
-    answer_id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
     content = Column(String)
     created_at = Column(DateTime)
     is_accepted = Column(BOOLEAN)
     votes_count = Column(Integer)
 
-    question_id = Column(Integer, ForeignKey('question.question_id'))
+    question_id = Column(Integer, ForeignKey('question.id'))
 
 
 class Comment(Base):
 
     __tablename__ = 'comment'
-    comment_id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
     content = Column(String)
     created_at = Column(DateTime)
     votes_count = Column(Integer)
 
-    answer_id = Column(Integer, ForeignKey('answer.answer_id'))
+    answer_id = Column(Integer, ForeignKey('answer.id'))
+    question_id = Column(Integer, ForeignKey('question.id'))
+    comments = relationship("Comment")
+
+    #Relations
+    comment_id = Column(Integer, ForeignKey('comment.id'))
 
 class User(Base):
 
     __tablename__ = 'user'
-    user_id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
     username = Column(String)
     password = Column(String)
     age = Column(Integer)
@@ -95,13 +100,16 @@ class User(Base):
 class Tag(Base):
 
     __tablename__ = 'tag'
-    tag_id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
     question_count = Column(Integer)
 
-    question_id = Column(Integer, ForeignKey('question.question_id'))
+    question_id = Column(Integer, ForeignKey('question.id'))
 
-# class Question_Answer_Comment(Base):
+class Question_Answer_Comment(Base):
 
-#     __tablename__ = 'question_answer_comment'
-#     qac_id = Column(Integer, primary_key=True)
-#     user_id = Column(Integer, ForeignKey)
+    __tablename__ = 'question_answer_comment'
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    question_id = Column(Integer, ForeignKey('question.id'))
+    answer_id = Column(Integer, ForeignKey('answer.id'))
+    
